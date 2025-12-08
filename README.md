@@ -1,36 +1,186 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <h1>💬 Realtime Chat</h1>
+  <p><strong>A blazingly fast, modern real-time chat application</strong></p>
 
-## Getting Started
+  <p>
+    <img src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js" alt="Next.js" />
+    <img src="https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Tailwind-4-38bdf8?style=for-the-badge&logo=tailwindcss" alt="Tailwind" />
+    <img src="https://img.shields.io/badge/Upstash-Redis-00e9a3?style=for-the-badge&logo=redis" alt="Upstash" />
+  </p>
+</div>
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Features
+
+- 🚀 **Real-time messaging** - Instant message delivery powered by Upstash Realtime
+- 🎨 **Modern UI** - Clean and responsive design with Tailwind CSS 4
+- 🔐 **Authentication** - Secure auth system with Elysia
+- 💾 **Redis Backend** - Fast data persistence with Upstash Redis
+- 🏠 **Room-based Chat** - Create and join different chat rooms
+- 📱 **Fully Responsive** - Works seamlessly on desktop, tablet, and mobile
+- ⚡ **Type-safe** - Full TypeScript support across the stack
+- 🎯 **Server Actions** - Leveraging Next.js 16 capabilities
+
+## 🛠️ Tech Stack
+
+**Frontend:**
+
+- [Next.js 16](https://nextjs.org) - React framework with App Router
+- [React 19](https://react.dev) - Latest React with React Compiler
+- [TypeScript](https://www.typescriptlang.org) - Type safety
+- [Tailwind CSS 4](https://tailwindcss.com) - Utility-first styling
+- [TanStack Query](https://tanstack.com/query) - Powerful async state management
+
+**Backend:**
+
+- [Elysia](https://elysiajs.com) - Fast and ergonomic web framework
+- [Upstash Redis](https://upstash.com) - Serverless Redis database
+- [Upstash Realtime](https://upstash.com) - Real-time messaging infrastructure
+- [Zod](https://zod.dev) - Schema validation
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 20+ installed
+- pnpm (recommended) or npm
+- Upstash account ([Sign up here](https://upstash.com))
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/piyushrepos/realtime_privacy_chat.git
+   cd realtime_chat
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   pnpm install
+   ```
+
+3. **Set up environment variables**
+
+   Create a `.env` file in the root directory:
+
+   ```env
+   # Upstash Redis
+   UPSTASH_REDIS_REST_URL=your_redis_url
+   UPSTASH_REDIS_REST_TOKEN=your_redis_token
+   ```
+
+4. **Run the development server**
+
+   ```bash
+   pnpm dev
+   ```
+
+5. **Open your browser**
+
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 📁 Project Structure
+
+```
+realtime_chat/
+├── src/
+│   ├── app/
+│   │   ├── api/           # API routes
+│   │   │   ├── [[...slug]]/   # Auth API
+│   │   │   └── realtime/      # Realtime API
+│   │   ├── room/          # Chat room pages
+│   │   └── lib/           # Core utilities
+│   │       ├── client.ts        # API client
+│   │       ├── realtime-client.ts
+│   │       ├── realtime.ts
+│   │       └── redis.ts
+│   ├── components/        # React components
+│   └── hooks/            # Custom React hooks
+├── public/               # Static assets
+└── ...config files
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎯 Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Creating a Chat Room
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Open the application in your browser
+2. Enter your username
+3. Create a new room or join an existing one
+4. Start chatting in real-time!
 
-## Learn More
+### Joining an Existing Room
 
-To learn more about Next.js, take a look at the following resources:
+Simply share the room URL with others, and they can join instantly.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔧 Available Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm dev      # Start development server
+pnpm build    # Build for production
+pnpm start    # Start production server
+pnpm lint     # Run ESLint
+```
 
-## Deploy on Vercel
+## 🌟 Key Features Explained
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Real-time Communication
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Messages are delivered instantly using Upstash Realtime, providing a seamless chat experience with minimal latency.
+
+### Auto Expiring Rooms
+
+Chat rooms and their content are automatically deleted after 10 minutes of creation, ensuring privacy and reducing data retention.
+
+### Secure Authentication
+
+User authentication is handled securely using Elysia, ensuring that only authorized users can access chat rooms.
+
+### Type Safety
+
+Every part of the application is fully typed, from the API routes to the frontend components, ensuring reliability and great developer experience.
+
+## 🚢 Deployment
+
+### Deploy on Vercel
+
+The easiest way to deploy your app:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=<your-repo-url>)
+
+Or manually:
+
+```bash
+pnpm build
+vercel --prod
+```
+
+Don't forget to add your environment variables in the Vercel dashboard!
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 🙏 Acknowledgments
+
+- [Next.js](https://nextjs.org) - The React Framework
+- [Upstash](https://upstash.com) - Serverless Database Platform
+- [Elysia](https://elysiajs.com) - Ergonomic Framework
+- [Vercel](https://vercel.com) - Deployment Platform
+
+---
+
+<div align="center">
+  <p>Built with ❤️ using Next.js and Upstash</p>
+  <p>⭐ Star this repo if you find it helpful!</p>
+</div>
