@@ -22,24 +22,26 @@ const generateUsername = () => {
   return `anonymous-${word}-${nanoid(5)}`;
 };
 
-export const useUsername = (): { username: string } => {
+export const useUsername = (): { username: string; isLoaded: boolean } => {
   const [username, setUsername] = useState<string>("");
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const main = () => {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         setUsername(stored);
-        return;
+      } else {
+        const newUsername = generateUsername();
+        localStorage.setItem(STORAGE_KEY, newUsername);
+        setUsername(newUsername);
       }
 
-      const newUsername = generateUsername();
-      localStorage.setItem(STORAGE_KEY, newUsername);
-      setUsername(newUsername);
+      setIsLoaded(true);
     };
 
     main();
   }, []);
 
-  return { username };
+  return { username, isLoaded };
 };

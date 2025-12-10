@@ -20,7 +20,7 @@ const Page = () => {
   const [copyStatus, setCopyStatus] = useState<"COPY" | "COPIED!">("COPY");
   const [timeRemaining, setTimeRemaining] = useState<number | null>(null);
   const [input, setInput] = useState("");
-  const { username } = useUsername();
+  const { username, isLoaded } = useUsername();
   const router = useRouter();
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -98,6 +98,7 @@ const Page = () => {
   });
 
   const copyLink = () => {
+    if (!window) return;
     const url = window.location.href;
     navigator.clipboard.writeText(url);
     setCopyStatus("COPIED!");
@@ -166,7 +167,11 @@ const Page = () => {
                     : "text-blue-500"
                 }`}
               >
-                {message.sender === username ? "You" : message.sender}
+                {isLoaded
+                  ? message.sender === username
+                    ? "You"
+                    : message.sender
+                  : "Loading..."}
               </span>
               <span className="text-[10px] text-zinc-600">
                 {format(message.timestamp, "hh:mm a")}

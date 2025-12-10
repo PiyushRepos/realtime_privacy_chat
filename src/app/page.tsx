@@ -14,7 +14,7 @@ export default function Page() {
 }
 
 function Home() {
-  const { username } = useUsername();
+  const { username, isLoaded } = useUsername();
   const router = useRouter();
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
@@ -80,7 +80,7 @@ function Home() {
               </label>
               <div className="flex items-center gap-3">
                 <div className="flex-1 bg-zinc-950 border border-zinc-800 p-3 text-sm text-zinc-400 font-mono">
-                  {username || "Anonymous"}
+                  {isLoaded ? username || "Anonymous" : "Loading..."}
                 </div>
               </div>
             </div>
