@@ -14,15 +14,22 @@ export const proxy = async (req: NextRequest) => {
   const meta = await redis.hgetall<{ connected: string[]; createdAt: string }>(
     `meta:${roomId}`
   );
-  console.log("running...");
+
   if (!meta)
     return NextResponse.redirect(new URL("/?error=room-not-found", req.url));
 
   const existingToken = req.cookies.get("x-auth-token")?.value;
-  console.log("existingToken:", existingToken);
+
   if (existingToken && meta.connected.includes(existingToken))
     return NextResponse.next();
-  console.log("Connected", meta.connected);
+
+  const userAgent = req.headers.get("user-agent") || "";
+  const isBot =
+    /bot|crawler|spider|crawling|WhatsApp|Telegram|facebook|twitter|linkedIn|slack/i.test(
+      userAgent
+    );
+
+  if (isBot) return NextResponse.next();
 
   if (meta.connected.length >= 2)
     return NextResponse.redirect(new URL("/?error=room-full", req.url));
@@ -35,7 +42,7 @@ export const proxy = async (req: NextRequest) => {
     path: "/",
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    sameSite: "lax",
   });
 
   await redis.hset(`meta:${roomId}`, {
